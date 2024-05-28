@@ -1,13 +1,20 @@
 require "yaml"
+require "logger"
 
 class MermaidErdMarkdown::Configuration
-  attr_accessor :result_path
+  attr_accessor :output_path
 
   def initialize
     config = {
-      result_path: "app/models/ERD.md"
+      output_path: "app/models/ERD.md"
     }
+    erd_config_path = "erd.yml"
 
-    @result_path = config[:result_path]
+    begin
+      erd_yml = YAML.safe_load File.open(erd_config_path)
+      @output_path = erd_yml["erd"]["output_path"]
+    rescue StandardError
+      @output_path = config[:output_path]
+    end
   end
 end

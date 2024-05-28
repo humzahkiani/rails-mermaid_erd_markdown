@@ -25,18 +25,22 @@ module MermaidErdMarkdown
 
     def perform
       new_erd = generate_mermaid_erd
-      current_erd_path = Pathname.new(configuration.result_path)
+      existing_erd_path = Pathname.new(configuration.output_path)
 
-      unless current_erd_path.exist?
-        logger.info("ERD does not currently exist. Creating...")
-        create_erd_file(new_erd)
-        logger.info("ERD successfully created")
+      unless existing_erd_path.exist?
+        logger.info("ERD does not currently exist at result path. Creating...")
+        begin
+          create_erd_file(new_erd)
+          logger.info("ERD successfully created at #{configuration.output_path}")
+        rescue StandardError
+          logger.info("Could not create ERD. Output path is invalid.")
+        end
+
         return
       end
 
-      current_erd = File.read(current_erd_path)
-
-      update_erd_file(current_erd, new_erd)
+      existing_erd = File.read(existing_erd_path)
+      update_erd_file(existing_erd, new_erd)
     end
 
     private
@@ -49,14 +53,14 @@ module MermaidErdMarkdown
       end
 
       logger.info("ERD already exists but is out of date. Overwriting...")
-      File.write(configuration.result_path, new_erd)
+      File.write(configuration.output_path, new_erd)
       logger.info("ERD successfully updated")
 
       nil
     end
 
     def create_erd_file(erd)
-      File.write(configuration.result_path, erd)
+      File.write(configuration.output_path, erd)
 
       nil
     end
@@ -100,8 +104,8 @@ module MermaidErdMarkdown
     end
   end
 
-  desc "Generate mermaid ERD diagram for database Models. "
-  task update_erd: :environment do
+  desc "Generate/update mermaid ERD diagram for database Models."
+  task generate_erd: :environment do
     perform
   end
 end

@@ -1,0 +1,3 @@
+# This is the path and filename of the generated ERD. You can modify it to change where the ERD is stored/updated.
+erd:
+    output_path: 'app/ERD.md'

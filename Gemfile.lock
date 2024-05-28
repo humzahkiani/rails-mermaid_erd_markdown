@@ -194,6 +194,7 @@ GEM
     rubocop-ast (1.31.3)
       parser (>= 3.3.1.0)
     ruby-progressbar (1.13.0)
+    sqlite3 (1.7.3-arm64-darwin)
     stringio (3.1.0)
     strscan (3.1.0)
     thor (1.3.1)
@@ -216,6 +217,7 @@ DEPENDENCIES
   rails-mermaid_erd_markdown!
   rake (~> 13.0)
   rubocop (~> 1.21)
+  sqlite3 (~> 1.4)
 
 BUNDLED WITH
    2.3.3

@@ -43,8 +43,6 @@ module MermaidErdMarkdown
       update_erd_file(existing_erd, new_erd)
     end
 
-    private
-
     def update_erd_file(current_erd, new_erd)
       # check if two diagrams are the same by comparing their MD5 hashes
       if Digest::MD5.hexdigest(current_erd) == Digest::MD5.hexdigest(new_erd)

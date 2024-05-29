@@ -27,13 +27,43 @@ and modifying the `result_path` as seen in the example at `docs/examples/erd.yml
 wish to generate in the path. 
 
 If an ERD already exists at the path specified, it will be parsed to determine if it is up to date. If it is, nothing happens. If it 
-is not, the ERD is ed. 
+is not up to date, the ERD will be updated. 
 
 One can create self-updating, living documentation by integrating this rake task into their CI. This ensures that the ERD is always up 
 to date and accurately describes the latest state of the models and their relationships.
 
 You can view the ERD by navigating to the file in Github, which supports rendering mermaid diagrams from code. If you are a Visual 
 Studio Code user, you can use the [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) extension to view the ERD directly in your IDE. 
+
+## Example ERD
+
+```mermaid
+erDiagram
+    %% --------------------------------------------------------
+    %% Entity-Relationship Diagram
+    %% --------------------------------------------------------
+
+    %% table name: articles
+    Article{
+        integer id PK 
+        string title  
+        text content  
+        datetime created_at  
+        datetime updated_at  
+    }
+
+    %% table name: comments
+    Comment{
+        integer id PK 
+        string commenter  
+        text body  
+        integer article_id FK 
+        datetime created_at  
+        datetime updated_at  
+    }
+
+    Comment }o--|| Article : "BT:article"
+```
 
 ## Development
 

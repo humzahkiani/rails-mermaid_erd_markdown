@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "rails-mermaid_erd_markdown/configuration"
+require "rails-mermaid_erd"
 require "digest/md5"
 require "rake"
 require "rake/dsl_definition"

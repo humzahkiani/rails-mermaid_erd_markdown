@@ -23,7 +23,7 @@ Or install it yourself as:
 To generate a mermaid ERD in markdown, run `rails generate_erd` or `rake generate_erd` from the terminal
 
 The default path for the generated ERD is `app/models/ERD.md`. You can modify this by creating an `erd.yml` file in the root directory
-and modifying the `result_path` as seen in the example at `docs/examples/erd.yml`. Make sure to include the markdown file name you 
+and modifying the `output_path` as seen in the example at `docs/examples/erd.yml`. Make sure to include the markdown file name you 
 wish to generate in the path. 
 
 If an ERD already exists at the path specified, it will be parsed to determine if it is up to date. If it is, nothing happens. If it 

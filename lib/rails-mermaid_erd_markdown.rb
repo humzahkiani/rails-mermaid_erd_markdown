@@ -15,9 +15,10 @@ module MermaidErdMarkdown
     attr_writer :logger
 
     def perform
-      return unless find_or_create_output_erd
+      return unless find_or_create_output
+      return unless erd_changed?
 
-      update_erd if erd_changed?
+      update_erd
 
       update_split_erds if configuration.split_output
     end
@@ -95,28 +96,31 @@ module MermaidErdMarkdown
       lines.join("\n")
     end
 
-    def split_output(source)
-      models = source[:Models]
-      relations = source[:Relations]
+    def split_output(source, depth = 1)
+      source_models = source[:Models]
+      source_relations = source[:Relations]
       output = []
 
-      models.each do |model|
-        current_models = [model]
-        current_relations = []
+      source_models.each do |model|
+        model_names = [model[:ModelName]]
+        search_models = model_names
+        relations = []
 
-        relations.each do |relation|
-          if relation[:LeftModelName] == model[:ModelName]
-            current_models << source[:Models].find { |m| m[:ModelName] == relation[:RightModelName] }
-            current_relations << relation
-          elsif relation[:RightModelName] == model[:ModelName]
-            current_models << source[:Models].find { |m| m[:ModelName] == relation[:LeftModelName] }
-            current_relations << relation
+        depth.times do
+          found_relations = []
+          next_search_models = []
+          search_models.each do |search_model|
+            found_relations += related_models(search_model, source_relations)
+            next_search_models += related_model_names(search_model, found_relations)
           end
+          search_models = next_search_models
+          model_names += search_models
+          relations += found_relations
         end
 
         output << {
-          Models: current_models,
-          Relations: current_relations
+          Models: models(model_names.uniq, source_models),
+          Relations: relations.uniq
         }
       end
 
@@ -149,7 +153,7 @@ module MermaidErdMarkdown
       false
     end
 
-    def find_or_create_output_erd
+    def find_or_create_output
       return true if output_path.exist?
 
       logger.info("ERD does not currently exist at result path. Creating...")
@@ -171,10 +175,29 @@ module MermaidErdMarkdown
       end
     end
 
+    def models(model_names, source_models)
+      model_names.map do |model_name|
+        source_models.find { |m| m[:ModelName] == model_name }
+      end
+    end
+
     def output_path(extension = nil)
       return Pathname.new(configuration.output_path) unless extension
 
       Pathname.new(configuration.output_path).sub_ext("_#{extension}.md")
+    end
+
+    def related_model_names(model_name, relations)
+      relations.map do |r|
+        r[:LeftModelName] == model_name ? r[:RightModelName] : r[:LeftModelName]
+      end
+    end
+
+    def related_models(model_name, relations)
+      relations.select do |relation|
+        relation[:LeftModelName] == model_name ||
+          relation[:RightModelName] == model_name
+      end
     end
 
     def update_erd
@@ -191,7 +214,7 @@ module MermaidErdMarkdown
 
       files = {}
 
-      split_output(data).each do |output|
+      split_output(data, configuration.relationship_depth).each do |output|
         model_name = output[:Models].first[:ModelName]
         model_path = output_path(model_name)
         write_file(model_markdown(output), model_path)

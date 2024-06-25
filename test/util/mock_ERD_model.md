@@ -1,3 +1,12 @@
+# User Entity-Relationship Diagram
+
+## Associated Models
+
+- [Article](app/models/ERD_Article.md)
+- [Profile](app/models/ERD_Profile.md)
+
+## Entity-Relationship Diagram
+
 ```mermaid
 erDiagram
     %% --------------------------------------------------------
@@ -13,15 +22,6 @@ erDiagram
         datetime updated_at
     }
 
-    %% table name: profiles
-    Profile{
-        integer id PK
-        text bio
-        integer user_id FK
-        datetime created_at
-        datetime updated_at
-    }
-
     %% table name: articles
     Article{
         integer id PK
@@ -32,17 +32,15 @@ erDiagram
         datetime updated_at
     }
 
-    %% table name: comments
-    Comment{
+    %% table name: profiles
+    Profile{
         integer id PK
-        string commenter
-        text body
-        integer article_id FK
+        text bio
+        integer user_id FK
         datetime created_at
         datetime updated_at
     }
 
     Article }o--|| User : "BT:user"
     Profile }o--|| User : "BT:user"
-    Comment }o--|| Article : "BT:article"
 ```

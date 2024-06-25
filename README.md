@@ -22,18 +22,15 @@ Or install it yourself as:
 
 To generate a mermaid ERD in markdown, run `rails generate_erd` or `rake generate_erd` from the terminal
 
-The default path for the generated ERD is `app/models/ERD.md`. You can modify this by creating an `erd.yml` file in the root directory
-and modifying the `output_path` as seen in the example at `docs/examples/erd.yml`. Make sure to include the markdown file name you 
-wish to generate in the path. 
+The default path for the generated ERD is `app/models/ERD.md`. You can modify this by creating an `erd.yml` file in the root directory and modifying the `output_path` as seen in the example at `docs/examples/erd.yml`. Make sure to include the markdown file name you wish to generate in the path. 
 
-If an ERD already exists at the path specified, it will be parsed to determine if it is up to date. If it is, nothing happens. If it 
-is not up to date, the ERD will be updated. 
+If an ERD already exists at the path specified, it will be parsed to determine if it is up to date. If it is, nothing happens. If it is not up to date, the ERD will be updated. 
 
-One can create self-updating, living documentation by integrating this rake task into their CI. This ensures that the ERD is always up 
-to date and accurately describes the latest state of the models and their relationships.
+One can create self-updating, living documentation by integrating this rake task into their CI. This ensures that the ERD is always up to date and accurately describes the latest state of the models and their relationships.
 
-You can view the ERD by navigating to the file in Github, which supports rendering mermaid diagrams from code. If you are a Visual 
-Studio Code user, you can use the [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) extension to view the ERD directly in your IDE. 
+You can view the ERD by navigating to the file in Github, which supports rendering mermaid diagrams from code. If you are a Visual Studio Code user, you can use the [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) extension to view the ERD directly in your IDE.
+
+If your entity diagram is too large to be displayed you can set a `split_output` configuration to `true` to generate multiple ERD files based on each model in your project. You can also set a `relationship_depth` configuration to include more than 1 level (the default) of associations in each document.
 
 ## Example ERD
 

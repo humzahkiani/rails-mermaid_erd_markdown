@@ -9,6 +9,8 @@ require "rails-mermaid_erd"
 
 module MermaidErdMarkdown
   class Document
+    attr_writer :logger
+
     def self.generate
       new.generate
     end
@@ -33,7 +35,7 @@ module MermaidErdMarkdown
         )
         doc.add(doc.subheader("Models"))
         files.each do |model, path|
-          doc.add(doc.list_item(doc.link(model, path)))
+          doc.add(doc.list_item(doc.link(model, "../#{path}")))
         end
         doc.add("")
       end
@@ -47,7 +49,7 @@ module MermaidErdMarkdown
         output[:Models].each do |model|
           next if model[:ModelName] == model_name
 
-          model_path = output_path(model[:ModelName])
+          model_path = "../#{output_path(model[:ModelName])}"
 
           doc.add(doc.list_item(doc.link(model[:ModelName], model_path)))
         end
@@ -153,14 +155,14 @@ module MermaidErdMarkdown
 
     def logger
       @logger ||= Logger.new($stdout).tap do |log|
-        log.progname = name
+        log.progname = self.class.name.split("::").first
       end
     end
 
     def models(model_names, source_models)
       model_names.map do |model_name|
         source_models.find { |m| m[:ModelName] == model_name }
-      end
+      end.compact
     end
 
     def output_path(extension = nil)
@@ -183,7 +185,7 @@ module MermaidErdMarkdown
     end
 
     def update_erd
-      logger.info("ERD writting to #{output_path}...")
+      logger.info("ERD writing to #{output_path}...")
       write_file(comprehensive_erd, output_path)
       logger.info("ERD successfully written")
     end

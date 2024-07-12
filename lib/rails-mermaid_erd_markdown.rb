@@ -8,8 +8,6 @@ module MermaidErdMarkdown
   extend Rake::DSL
 
   class << self
-    attr_writer :logger
-
     def perform
       MermaidErdMarkdown::Document.generate
     end

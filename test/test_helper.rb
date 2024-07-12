@@ -3,6 +3,8 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "rails-mermaid_erd_markdown"
 require "rails-mermaid_erd_markdown/configuration"
+require "rails-mermaid_erd_markdown/document"
+require "rails-mermaid_erd_markdown/markdown"
 
 require "minitest/autorun"
 require File.expand_path("./dummy-rails/config/environment", __dir__)

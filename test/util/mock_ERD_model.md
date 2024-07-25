@@ -2,8 +2,8 @@
 
 ## Associated Models
 
-- [Article](app/models/ERD_Article.md)
-- [Profile](app/models/ERD_Profile.md)
+- [Article](../app/models/ERD_Article.md)
+- [Profile](../app/models/ERD_Profile.md)
 
 ## Entity-Relationship Diagram
 

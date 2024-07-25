@@ -4,7 +4,7 @@ Each model has its own ERD diagram. The diagram shows the selected model, plus 1
 
 ## Models
 
-- [User](User.md)
-- [Profile](Profile.md)
-- [Article](Article.md)
-- [Comment](Comment.md)
+- [User](../User.md)
+- [Profile](../Profile.md)
+- [Article](../Article.md)
+- [Comment](../Comment.md)

@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 require_relative "configuration"
-require_relative "markdown"
+require_relative "markdown_document"
 require_relative "source_data"
 require "digest/md5"
 require "logger"
 require "pathname"
 
 module MermaidErdMarkdown
-  class Document
+  class Generator
     attr_writer :logger
 
     def self.generate
@@ -25,7 +25,7 @@ module MermaidErdMarkdown
     end
 
     def index_markdown(files)
-      MermaidErdMarkdown::Markdown.generate do |doc|
+      MermaidErdMarkdown::MarkdownDocument.create do |doc|
         doc.add(doc.header("Entity Relationship Diagrams"))
         doc.add(
           "Each model has its own ERD diagram. The diagram shows the "\
@@ -42,7 +42,7 @@ module MermaidErdMarkdown
     end
 
     def model_markdown(output)
-      MermaidErdMarkdown::Markdown.generate do |doc|
+      MermaidErdMarkdown::MarkdownDocument.create do |doc|
         model_name = output[:Models].first[:ModelName]
         doc.add(doc.header("#{model_name} Entity-Relationship Diagram"))
         doc.add(doc.subheader("Associated Models"))
@@ -60,7 +60,7 @@ module MermaidErdMarkdown
     end
 
     def mermaid_markdown(source)
-      MermaidErdMarkdown::Markdown.generate do
+      MermaidErdMarkdown::MarkdownDocument.create do
         erd do
           add(
             source[:Models].map do |model|

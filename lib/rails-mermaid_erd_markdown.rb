@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "rails-mermaid_erd_markdown/document"
+require_relative "rails-mermaid_erd_markdown/generator"
 require "rake"
 require "rake/dsl_definition"
 
@@ -9,7 +9,7 @@ module MermaidErdMarkdown
 
   class << self
     def perform
-      MermaidErdMarkdown::Document.generate
+      MermaidErdMarkdown::Generator.generate
     end
   end
 

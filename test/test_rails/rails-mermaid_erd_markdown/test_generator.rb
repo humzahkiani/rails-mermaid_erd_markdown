@@ -3,7 +3,7 @@
 require_relative "../../mock_data/models"
 require "test_helper"
 
-class MermaidErdMarkdown::DocumentTest < Minitest::Test
+class MermaidErdMarkdown::GeneratorTest < Minitest::Test
   include MockData::Models
 
   def test_index_markdown
@@ -19,7 +19,7 @@ class MermaidErdMarkdown::DocumentTest < Minitest::Test
       "Comment" => "Comment.md"
     }
 
-    result = MermaidErdMarkdown::Document.new.index_markdown(files)
+    result = MermaidErdMarkdown::Generator.new.index_markdown(files)
 
     assert_equal mock_markdown, result
   end
@@ -35,7 +35,7 @@ class MermaidErdMarkdown::DocumentTest < Minitest::Test
       Relations: [article_relation, profile_relation]
     }
 
-    result = MermaidErdMarkdown::Document.new.model_markdown(source)
+    result = MermaidErdMarkdown::Generator.new.model_markdown(source)
 
     assert_equal mock_markdown, result
   end
@@ -45,7 +45,7 @@ class MermaidErdMarkdown::DocumentTest < Minitest::Test
       File.expand_path("../../example_output/mock_ERD.md", __dir__)
     mock_markdown = File.read(markdown_file_path)
 
-    result = MermaidErdMarkdown::Document.new.mermaid_markdown(
+    result = MermaidErdMarkdown::Generator.new.mermaid_markdown(
       stubbed_model_data
     )
 

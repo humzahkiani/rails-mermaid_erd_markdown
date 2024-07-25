@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module MermaidErdMarkdown
-  class Markdown
+  class MarkdownDocument
     attr_accessor :is_show_key, :is_show_comment
 
-    def self.generate(&block)
+    def self.create(&block)
       new.generate(&block)
     end
 

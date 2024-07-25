@@ -2,9 +2,9 @@
 
 require "test_helper"
 
-class MermaidErdMarkdown::MarkdownTest < Minitest::Test
+class MermaidErdMarkdown::MarkdownDocumentTest < Minitest::Test
   def test_generate
-    markdown = MermaidErdMarkdown::Markdown.generate do
+    markdown = MermaidErdMarkdown::MarkdownDocument.create do
       add(header("Header"))
       add(subheader("Subheader"))
       add(list_item("List item"))
@@ -43,7 +43,7 @@ class MermaidErdMarkdown::MarkdownTest < Minitest::Test
       Comment: "comment"
     }
 
-    markdown = MermaidErdMarkdown::Markdown.generate do
+    markdown = MermaidErdMarkdown::MarkdownDocument.create do
       erd do
         add(
           erd_table(model[:TableName], model[:ModelName]) do

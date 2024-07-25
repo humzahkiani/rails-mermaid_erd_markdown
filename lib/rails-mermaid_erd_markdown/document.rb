@@ -2,10 +2,10 @@
 
 require_relative "configuration"
 require_relative "markdown"
+require_relative "source_data"
 require "digest/md5"
 require "logger"
 require "pathname"
-require "rails-mermaid_erd"
 
 module MermaidErdMarkdown
   class Document
@@ -80,49 +80,14 @@ module MermaidErdMarkdown
       end
     end
 
-    def split_output(source, depth = 1)
-      source_models = source[:Models]
-      source_relations = source[:Relations]
-      output = []
-
-      source_models.each do |model|
-        model_names = [model[:ModelName]]
-        search_models = model_names
-        relations = []
-
-        depth.times do
-          found_relations = []
-          next_search_models = []
-          search_models.each do |search_model|
-            found_relations += related_models(search_model, source_relations)
-            next_search_models += related_model_names(search_model, found_relations)
-          end
-          search_models = next_search_models
-          model_names += search_models
-          relations += found_relations
-        end
-
-        output << {
-          Models: models(model_names.uniq, source_models),
-          Relations: relations.uniq
-        }
-      end
-
-      output
-    end
-
     private
 
     def comprehensive_erd
-      @comprehensive_erd ||= mermaid_markdown(data)
+      @comprehensive_erd ||= mermaid_markdown(source_data.data)
     end
 
     def configuration
       @configuration ||= MermaidErdMarkdown::Configuration.new
-    end
-
-    def data
-      @data ||= RailsMermaidErd::Builder.model_data
     end
 
     def erd_changed?
@@ -159,29 +124,14 @@ module MermaidErdMarkdown
       end
     end
 
-    def models(model_names, source_models)
-      model_names.map do |model_name|
-        source_models.find { |m| m[:ModelName] == model_name }
-      end.compact
-    end
-
     def output_path(extension = nil)
       return Pathname.new(configuration.output_path) unless extension
 
       Pathname.new(configuration.output_path).sub_ext("_#{extension}.md")
     end
 
-    def related_model_names(model_name, relations)
-      relations.map do |r|
-        r[:LeftModelName] == model_name ? r[:RightModelName] : r[:LeftModelName]
-      end
-    end
-
-    def related_models(model_name, relations)
-      relations.select do |relation|
-        relation[:LeftModelName] == model_name ||
-          relation[:RightModelName] == model_name
-      end
+    def source_data
+      @source_data ||= MermaidErdMarkdown::SourceData.new
     end
 
     def update_erd
@@ -198,7 +148,9 @@ module MermaidErdMarkdown
 
       files = {}
 
-      split_output(data, configuration.relationship_depth).each do |output|
+      depth = configuration.relationship_depth
+
+      source_data.split_output(depth).each do |output|
         model_name = output[:Models].first[:ModelName]
         model_path = output_path(model_name)
         write_file(model_markdown(output), model_path)

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-mermaid_erd_markdown (0.3.0)
+    rails-mermaid_erd_markdown (0.3.1)
       rails (>= 5.2)
       rails-mermaid_erd (~> 0.4.2)
 

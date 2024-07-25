@@ -60,20 +60,20 @@ module MermaidErdMarkdown
     end
 
     def mermaid_markdown(source)
-      MermaidErdMarkdown::Markdown.generate do |doc|
-        doc.erd do |erd|
-          erd.add(
+      MermaidErdMarkdown::Markdown.generate do
+        erd do
+          add(
             source[:Models].map do |model|
-              erd.erd_table(model[:TableName], model[:ModelName]) do
+              erd_table(model[:TableName], model[:ModelName]) do
                 model[:Columns].map do |column|
-                  erd.erd_table_column(column)
+                  erd_table_column(column)
                 end
               end
             end
           )
-          erd.add(
+          add(
             source[:Relations].map do |relation|
-              erd.erd_relation(relation)
+              erd_relation(relation)
             end
           )
         end

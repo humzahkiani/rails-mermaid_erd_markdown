@@ -221,11 +221,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  minitest (~> 5.0)
+  minitest
   rails-mermaid_erd_markdown!
-  rake (~> 13.0)
-  rubocop (~> 1.21)
-  sqlite3 (~> 1.4)
+  rake
+  rubocop
+  sqlite3
 
 BUNDLED WITH
    2.3.3

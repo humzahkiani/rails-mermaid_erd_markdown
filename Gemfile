@@ -6,8 +6,8 @@ source "https://rubygems.org"
 gemspec
 
 group :development do
-  gem "minitest", "~> 5.0"
-  gem "rake", "~> 13.0"
-  gem "rubocop", "~> 1.21"
-  gem "sqlite3", "~> 1.4"
+  gem "minitest"
+  gem "rake"
+  gem "rubocop"
+  gem "sqlite3"
 end

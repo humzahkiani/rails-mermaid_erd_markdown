@@ -31,14 +31,12 @@ jobs:
             # Add or replace dependency steps here
             - name: Install Ruby and gems
               uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
-              with:
-                  bundler-cache: true
             # Add or replace database setup steps here
             - name: Set up database schema
-              run: cd test/dummy-rails; rails db:schema:load
+              run: cd test/dummy-rails && bundle exec rails db:schema:setup
             # Add or replace test runners here
             - name: Run tests
-              run: rake
+              run: bundle exec minitest
 
     lint:
         runs-on: ubuntu-latest
@@ -47,8 +45,6 @@ jobs:
               uses: actions/checkout@v4
             - name: Install Ruby and gems
               uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
-              with:
-                  bundler-cache: true
             # Add or replace any other lints here
             - name: Lint Ruby files
               run: bundle exec rubocop --parallel

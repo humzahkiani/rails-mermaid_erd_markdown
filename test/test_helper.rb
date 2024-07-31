@@ -8,4 +8,3 @@ require "rails-mermaid_erd_markdown/markdown_document"
 require "rails-mermaid_erd_markdown/source_data"
 
 require "minitest/autorun"
-require File.expand_path("./dummy-rails/config/environment", __dir__)

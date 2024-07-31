@@ -51,4 +51,4 @@ jobs:
                   bundler-cache: true
             # Add or replace any other lints here
             - name: Lint Ruby files
-              run: bundle install; bundle exec rubocop --parallel
+              run: bin/rubocop --parallel

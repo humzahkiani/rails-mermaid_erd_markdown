@@ -35,7 +35,7 @@ jobs:
                   bundler-cache: true
             # Add or replace database setup steps here
             - name: Set up database schema
-              run: bin/rails db:schema:load
+              run: cd test/dummy-rails; rails db:schema:load
             # Add or replace test runners here
             - name: Run tests
               run: rake
@@ -51,4 +51,4 @@ jobs:
                   bundler-cache: true
             # Add or replace any other lints here
             - name: Lint Ruby files
-              run: rubocop --parallel
+              run: bundle exec rubocop --parallel

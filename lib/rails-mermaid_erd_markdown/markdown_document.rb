@@ -8,7 +8,6 @@ module MermaidErdMarkdown
       new.generate(&block)
     end
 
-
     def initialize
       @is_show_key = true
       @is_show_comment = true
@@ -93,7 +92,7 @@ module MermaidErdMarkdown
     def link(text, url)
       "[#{text}](#{url})"
     end
-    
+
     def list_item(text)
       "- #{text}"
     end

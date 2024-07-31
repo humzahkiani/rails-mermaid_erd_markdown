@@ -8,7 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["humzahkiani"]
   spec.email = ["89326566+humzahkiani@users.noreply.github.com"]
 
-  spec.summary = "This is a rails gem that extends the rails-mermaid_erd gem to generate a mermaid ERD for Rails Models in markdown directly in source code."
+  spec.summary = "This is a rails gem that extends the rails-mermaid_erd gem to generate a mermaid ERD for Rails " \
+  "Models in markdown directly in source code."
   spec.homepage = "https://github.com/humzahkiani/rails-mermaid_erd_markdown"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"

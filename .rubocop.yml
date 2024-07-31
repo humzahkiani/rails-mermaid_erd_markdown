@@ -3,7 +3,7 @@ AllCops:
     TargetRubyVersion: 2.6
     Exclude:
         - 'test/**/*'
-        - 'vendor/**/*.rb'
+        - 'vendor/**/*'
 
 Naming/FileName:
     Enabled: false

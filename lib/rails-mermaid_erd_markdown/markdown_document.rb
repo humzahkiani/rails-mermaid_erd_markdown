@@ -47,9 +47,9 @@ module MermaidErdMarkdown
       right_model_name = relation[:RightModelName].tr(":", "-")
       comment = is_show_comment ? ": \"#{relation[:Comment]}\"" : ": \"\""
 
-      "    #{left_model_name} #{relation[:LeftValue]}"\
-      "#{relation[:Line]}#{relation[:RightValue]}"\
-      " #{right_model_name} #{comment}"
+      "    #{left_model_name} #{relation[:LeftValue]}" \
+        "#{relation[:Line]}#{relation[:RightValue]} " \
+        "#{right_model_name} #{comment}"
     end
 
     def erd_table(table_name, model_name)

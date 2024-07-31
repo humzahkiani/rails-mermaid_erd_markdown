@@ -28,9 +28,9 @@ module MermaidErdMarkdown
       MermaidErdMarkdown::MarkdownDocument.create do |doc|
         doc.add(doc.header("Entity Relationship Diagrams"))
         doc.add(
-          "Each model has its own ERD diagram. The diagram shows the "\
-          "selected model, plus #{configuration.relationship_depth} "\
-          "associated model(s) deep. Click on the model name to view "\
+          "Each model has its own ERD diagram. The diagram shows the " \
+          "selected model, plus #{configuration.relationship_depth} " \
+          "associated model(s) deep. Click on the model name to view " \
           "the diagram.\n"
         )
         doc.add(doc.subheader("Models"))

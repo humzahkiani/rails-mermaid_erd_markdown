@@ -8,7 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["humzahkiani"]
   spec.email = ["89326566+humzahkiani@users.noreply.github.com"]
 
-  spec.summary = "This is a rails gem that extends the rails-mermaid_erd gem to generate a mermaid ERD for Rails Models in markdown directly in source code."
+  spec.summary = "This is a rails gem that extends the rails-mermaid_erd gem to generate a mermaid ERD for Rails " \
+                 "Models in markdown directly in source code."
   spec.homepage = "https://github.com/humzahkiani/rails-mermaid_erd_markdown"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
@@ -27,10 +28,11 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  # Uncomment to register a new dependency of your gem
+  # Runtime Dependencies
   spec.add_dependency "rails", ">= 5.2"
   spec.add_dependency "rails-mermaid_erd", "~> 0.4.2"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
+  spec.metadata["rubygems_mfa_required"] = "true"
 end

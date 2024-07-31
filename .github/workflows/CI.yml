@@ -36,7 +36,7 @@ jobs:
             # Add or replace database setup steps here
             # Add or replace test runners here
             - name: Run tests
-              run: rake
+              run: bundle exec rake
 
     lint:
         runs-on: ubuntu-latest

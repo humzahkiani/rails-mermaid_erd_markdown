@@ -1,7 +1,6 @@
 ## [Unreleased]
 
 ## [0.1.0] - 2024-05-27
-
 - Initial release
 - Create ERD mermaid markdown of all ActiveRecord models
 
@@ -13,3 +12,7 @@
 - Fix minor issues
 - Add ability to optionally split into multiple ERDs 
 - Refactor classes to separate concerns
+
+## [0.3.1] - 2024-08-10
+- Update docs
+- Change rails-mermaid_erd version dependency to at least 0.4.2

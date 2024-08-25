@@ -62,14 +62,17 @@ module MermaidErdMarkdown
 
     def filter_model_data(raw_data)
       filtered_data = {}
-      ignored_models = configuration.ignored_models
       filtered_data[:Models] = raw_data[:Models].select do |model_hash|
-        ignored_models.exclude?(model_hash[:ModelName])
+        not_filtered?(model_hash[:ModelName])
       end
       filtered_data[:Relations] = raw_data[:Relations].select do |relation_hash|
-        ignored_models.exclude?(relation_hash[:LeftModelName]) && ignored_models.exclude?(relation_hash[:RightModelName])
+        not_filtered?(relation_hash[:LeftModelName]) && not_filtered?(relation_hash[:RightModelName])
       end
       filtered_data
+    end
+
+    def not_filtered?(model_name)
+      configuration.ignored_models.exclude?(model_name)
     end
 
     def models(model_names, source_models)

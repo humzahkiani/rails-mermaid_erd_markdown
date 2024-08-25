@@ -2,7 +2,7 @@
 
 A Ruby on Rails gem that extends rails-mermaid_erd to generate mermaid Entity-Relationship Diagrams (ERD) for ActiveRecord Models. When combined with Continuous Integration (CI) pipelines, it enables one to generate living, self-updating documentation of their data. 
 
-## Example ERD
+## Example Entity-Relationship Diagram
 
 ```mermaid
 erDiagram
@@ -67,10 +67,15 @@ erd:
     output_path: 'app/ERD.md' # Set output path of ERDs, default: 'app/ERD.md'
     split_output: false, # Generates individual ERDs for each model with a specified depth, default: false
     relationship_depth: 1 # Configured depth of individual ERD model generation, default: 1
+    ignored_models: # Models to be filtered out of all ERDs (case-sensitive)
+        - Article 
+        - Comment
 
 ```
 
 If your entity diagram is too large to be displayed you can set a `split_output` configuration to `true` to generate multiple ERD files based on each model in your project. 
+
+Or you can specify the models to be filtered out of the ERDs using `ignored_models`
 
 You can also set a `relationship_depth` configuration to include more than 1 level (the default) of associations in each document.
 

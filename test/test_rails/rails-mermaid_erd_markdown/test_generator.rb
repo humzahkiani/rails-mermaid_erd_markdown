@@ -32,7 +32,7 @@ class MermaidErdMarkdown::GeneratorTest < Minitest::Test
 
     source = {
       Models: [user_model, article_model, profile_model],
-      Relations: [article_relation, profile_relation]
+      Relations: [article_user_relation, profile_user_relation]
     }
 
     result = MermaidErdMarkdown::Generator.new.model_markdown(source)

@@ -9,19 +9,19 @@ class MermaidErdMarkdown::SourceDataTest < Minitest::Test
   def test_split_output
     expected_user = {
       Models: [user_model, article_model, profile_model],
-      Relations: [article_relation, profile_relation]
+      Relations: [article_user_relation, profile_user_relation]
     }
     expected_profile = {
       Models: [profile_model, user_model],
-      Relations: [profile_relation]
+      Relations: [profile_user_relation]
     }
     expected_article = {
       Models: [article_model, user_model, comment_model],
-      Relations: [article_relation, comment_relation]
+      Relations: [article_user_relation, comment_article_relation]
     }
     expected_comment = {
       Models: [comment_model, article_model],
-      Relations: [comment_relation]
+      Relations: [comment_article_relation]
     }
     expected = [
       expected_user,
@@ -40,19 +40,19 @@ class MermaidErdMarkdown::SourceDataTest < Minitest::Test
   def test_split_output_with_depth
     expected_user = {
       Models: [user_model, article_model, profile_model, comment_model],
-      Relations: [article_relation, profile_relation, comment_relation]
+      Relations: [article_user_relation, profile_user_relation, comment_article_relation]
     }
     expected_profile = {
       Models: [profile_model, user_model, article_model],
-      Relations: [profile_relation, article_relation]
+      Relations: [profile_user_relation, article_user_relation]
     }
     expected_article = {
       Models: [article_model, user_model, comment_model, profile_model],
-      Relations: [article_relation, comment_relation, profile_relation]
+      Relations: [article_user_relation, comment_article_relation, profile_user_relation]
     }
     expected_comment = {
       Models: [comment_model, article_model, user_model],
-      Relations: [comment_relation, article_relation]
+      Relations: [comment_article_relation, article_user_relation]
     }
     expected = [
       expected_user,
@@ -67,4 +67,5 @@ class MermaidErdMarkdown::SourceDataTest < Minitest::Test
       assert_equal expected, result
     end
   end
+
 end

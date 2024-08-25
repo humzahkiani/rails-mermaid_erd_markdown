@@ -68,4 +68,30 @@ class MermaidErdMarkdown::SourceDataTest < Minitest::Test
     end
   end
 
+  def test_data_filtered
+    stub_config = Minitest::Mock.new
+
+    def stub_config.output_path; "app/models/ERD.md"; end
+    def stub_config.split_output; false; end
+    def stub_config.relationship_depth; 1; end
+    def stub_config.ignored_models; ['User']; end
+
+    expected = {
+      Models: [
+        profile_model,
+        article_model,
+        comment_model
+      ], Relations: [
+        comment_article_relation
+      ]
+    }
+
+    RailsMermaidErd::Builder.stub :model_data, stubbed_model_data do
+      MermaidErdMarkdown::Configuration.stub :new, stub_config do
+        result = MermaidErdMarkdown::SourceData.new.data
+
+        assert_equal expected, result
+      end 
+    end
+  end
 end

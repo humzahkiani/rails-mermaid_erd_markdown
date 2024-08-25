@@ -20,7 +20,7 @@ module MermaidErdMarkdown
         @output_path = erd_yml["erd"]["output_path"] || config[:output_path]
         @split_output = erd_yml["erd"]["split_output"] || config[:split_output]
         @relationship_depth = erd_yml["erd"]["relationship_depth"] || config[:relationship_depth]
-        @ignored_models = erd_yaml["erd"]["ignored_models"] || config[:ignored_models]
+        @ignored_models = erd_yml["erd"]["ignored_models"] || config[:ignored_models]
       rescue StandardError
         @output_path = config[:output_path]
         @split_output = config[:split_output]

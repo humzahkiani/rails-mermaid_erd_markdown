@@ -1,6 +1,6 @@
 # rails-mermaid_erd_markdown
 
-A Ruby on Rails gem that extends rails-mermaid_erd to generate mermaid Entity-Relationship Diagrams (ERD) for ActiveRecord Models. When combined with Continuous Integration (CI) pipelines, it enables one to generate living, self-updating documentation of their data. 
+A Ruby on Rails gem that extends [rails-mermaid_erd](https://github.com/koedame/rails-mermaid_erd) to generate mermaid Entity-Relationship Diagrams (ERD) for ActiveRecord Models in markdown. When combined with Continuous Integration (CI) pipelines, it enables one to generate living, self-updating documentation of their data. 
 
 ## Example Entity-Relationship Diagram
 

@@ -54,7 +54,7 @@ module MockData
       }
     end
 
-    def article_relation
+    def article_user_relation
       {
         LeftModelName: "Article",
         LeftValue: "}o",
@@ -65,7 +65,7 @@ module MockData
       }
     end
 
-    def profile_relation
+    def profile_user_relation
       {
         LeftModelName: "Profile",
         LeftValue: "}o",
@@ -76,7 +76,7 @@ module MockData
       }
     end
 
-    def comment_relation
+    def comment_article_relation
       {
         LeftModelName: "Comment",
         LeftValue: "}o",
@@ -95,9 +95,9 @@ module MockData
           article_model,
           comment_model
         ], Relations: [
-          article_relation,
-          profile_relation,
-          comment_relation
+          article_user_relation,
+          profile_user_relation,
+          comment_article_relation
         ]
       }
     end

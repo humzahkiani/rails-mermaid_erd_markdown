@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 require "rails-mermaid_erd"
+require "active_support"
+require "active_support/core_ext/enumerable"
+require "active_support/core_ext/object"
 
 module MermaidErdMarkdown
   class SourceData
     def data
-      @data ||= RailsMermaidErd::Builder.model_data
+      @data ||= generate_model_data
     end
 
     def split_output(depth = 1)
@@ -40,6 +43,37 @@ module MermaidErdMarkdown
     end
 
     private
+
+    def configuration
+      @configuration ||= MermaidErdMarkdown::Configuration.new
+    end
+
+    def generate_model_data
+      raw_data = RailsMermaidErd::Builder.model_data
+
+      return raw_data unless filter_model_data?
+
+      filter_model_data(raw_data)
+    end
+
+    def filter_model_data?
+      configuration.ignored_models.present?
+    end
+
+    def filter_model_data(raw_data)
+      filtered_data = {}
+      filtered_data[:Models] = raw_data[:Models].select do |model_hash|
+        not_filtered?(model_hash[:ModelName])
+      end
+      filtered_data[:Relations] = raw_data[:Relations].select do |relation_hash|
+        not_filtered?(relation_hash[:LeftModelName]) && not_filtered?(relation_hash[:RightModelName])
+      end
+      filtered_data
+    end
+
+    def not_filtered?(model_name)
+      configuration.ignored_models.exclude?(model_name)
+    end
 
     def models(model_names, source_models)
       model_names.map do |model_name|

@@ -18,3 +18,6 @@
 
 ## [0.3.2] - 2024-08-10
 - (HOTFIX) Fix bundler + lockfile out-of-sync issues
+
+## [0.4.0] - 2024-08-31
+- [Feature] Filter out specified models from ERDs
